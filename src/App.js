@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import ToDoList from "./components/ToDoList";
 
 class App extends Component {
   render() {
@@ -8,7 +8,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route path="/" component={Dashboard} />
+            <Route path="/" component={ToDoList} />
           </Switch>
         </div>
       </BrowserRouter>
