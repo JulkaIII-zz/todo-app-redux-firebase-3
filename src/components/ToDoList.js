@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import * as actions from "../actions";
 import ToDoListItem from "./ToDoListItem";
+import Preloader from "./Preloader";
 
 class ToDoList extends Component {
   state = {
@@ -16,9 +17,9 @@ class ToDoList extends Component {
 
   handleFormSubmit = event => {
     const { addFormValue } = this.state;
-    const { addToDo } = this.props;
+    const { addToDo, auth } = this.props;
     event.preventDefault();
-    addToDo({ title: addFormValue });
+    addToDo({ title: addFormValue }, auth.uid);
     this.setState({ addFormValue: "" });
   };
 
@@ -51,22 +52,32 @@ class ToDoList extends Component {
     });
     if (!_.isEmpty(toDos)) {
       return toDos;
+    } else if (data === null) {
+      return (
+        <div className="col s10 offset-s1 center-align">
+          <img
+            alt="Nothing was found"
+            id="nothing-was-found"
+            src="/img/nothing.png"
+          />
+          <h4>You have completed all the tasks</h4>
+          <p>Start by clicking add button in the bottom of the screen</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="row center-align">
+          <div className="col s4 offset-s4">
+            <Preloader />
+          </div>
+        </div>
+      );
     }
-    return (
-      <div className="col s10 offset-s1 center-align">
-        <img
-          alt="Nothing was found"
-          id="nothing-was-found"
-          src="/img/nothing.png"
-        />
-        <h4>You have completed all the tasks</h4>
-        <p>Start by clicking add button in the bottom of the screen</p>
-      </div>
-    );
   }
 
-  componentWillMount() {
-    this.props.fetchToDos();
+  componentDidMount() {
+    const { auth } = this.props;
+    this.props.fetchToDos(auth.uid);
   }
 
   render() {
@@ -78,6 +89,13 @@ class ToDoList extends Component {
           {this.renderToDos()}
         </div>
         <div className="fixed-action-btn">
+          <button
+            onClick={this.props.signOut}
+            id="sign-out-button"
+            className="btn-floating btn-large teal darken-4"
+          >
+            <i className="large material-icons">exit_to_app</i>
+          </button>
           <button
             onClick={() => this.setState({ addFormVisible: !addFormVisible })}
             className="btn-floating btn-large teal darken-4"
@@ -94,10 +112,14 @@ class ToDoList extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => {
+const mapStateToProps = ({ data, auth }) => {
   return {
-    data
+    data,
+    auth
   };
 };
 
-export default connect(mapStateToProps, actions)(ToDoList);
+export default connect(
+  mapStateToProps,
+  actions
+)(ToDoList);
