@@ -1,5 +1,8 @@
 body {
-    //background-color: silver;
+  //background-color: silver;
+  height: 100vh;
+  background: url(/img/back.jpeg) no-repeat center bottom;
+  background-size: cover;
 }
 
 .to-do-list-container {

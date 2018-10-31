@@ -2,6 +2,7 @@ import { todosRef, authRef, provider } from "../config/firebase";
 import { FETCH_TODOS, FETCH_USER } from "./types";
 
 export const addToDo = newToDo => async dispatch => {
+  console.log("todo: ", newToDo);
   todosRef.push().set(newToDo);
 };
 
@@ -20,6 +21,7 @@ export const fetchToDos = () => async dispatch => {
 
 export const fetchUser = () => dispatch => {
   authRef.onAuthStateChanged(user => {
+    console.log("name: ", name);
     if (user) {
       dispatch({
         type: FETCH_USER,
