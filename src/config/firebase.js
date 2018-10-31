@@ -10,7 +10,8 @@ const FirebaseConfig = {
   storageBucket: "todos-ec8f5.appspot.com",
   messagingSenderId: "264508941802"
 };
-firebase.initializeApp(FirebaseConfig);
+const fire = firebase.initializeApp(FirebaseConfig);
+export default fire;
 
 const databaseRef = firebase.database().ref();
 export const todosRef = databaseRef.child("todos");

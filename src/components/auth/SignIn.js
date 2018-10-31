@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../actions";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 class Signin extends Component {
   static contextTypes = {
@@ -11,7 +12,7 @@ class Signin extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.auth) {
-      this.context.router.history.push("/app");
+      this.context.router.history.push("/todos");
     }
   }
 
@@ -26,6 +27,7 @@ class Signin extends Component {
             Sign In With Google
           </a>
         </div>
+        <NavLink to="/signup">Signup</NavLink>
       </div>
     );
   }
