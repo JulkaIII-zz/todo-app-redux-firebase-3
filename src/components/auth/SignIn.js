@@ -1,7 +1,7 @@
-import "../styles/signIn.scss";
+import "../../styles/signIn.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { signIn } from "../actions";
+import { signIn } from "../../actions";
 import PropTypes from "prop-types";
 
 class Signin extends Component {
