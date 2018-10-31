@@ -87,15 +87,6 @@ class ToDoList extends Component {
           {this.renderAddForm()}
           {this.renderToDos()}
         </div>
-        <div className="fixed-action-btn">
-          <button
-            onClick={this.props.signOut}
-            id="sign-out-button"
-            className="btn-floating btn-large teal darken-4"
-          >
-            <i className="large material-icons">exit_to_app</i>
-          </button>
-        </div>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { signOut, signIn } from "../actions/index.js";
+import { signOut, signUp } from "../actions/index.js";
 
 const Navbar = props => {
   const { auth } = props;
@@ -17,7 +17,7 @@ const Navbar = props => {
     ) : (
       <ul className="right">
         <li>
-          <a onClick={props.signIn}>Log in</a>
+          <NavLink to="/signup">Signup</NavLink>
         </li>
       </ul>
     );

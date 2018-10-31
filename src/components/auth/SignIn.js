@@ -56,16 +56,17 @@ class Signin extends Component {
               </div>
             </div>
           </form>
+
+          <p />
           <a
             href="#"
-            className="social-signin"
+            className="waves-effect waves-light btn social google red darken-1"
             onClick={this.props.signInWithGoogle}
           >
-            <i className="fa fa-google social-signin-icon" />
-            Sign In With Google
+            <i className="fa fa-google social-signin-icon" /> Sign in with
+            google
           </a>
         </div>
-        <NavLink to="/signup">Signup</NavLink>
       </div>
     );
   }
