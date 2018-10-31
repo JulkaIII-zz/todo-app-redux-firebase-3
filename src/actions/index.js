@@ -53,3 +53,14 @@ export const signOut = () => dispatch => {
       console.log(error);
     });
 };
+
+export const signUp = (newUser) => dispatch => {
+  authRef
+    .createUserWithEmailAndPassword(newUser.email, newUser.password)
+    .then(() => {
+      dispatch({ type: "SIGNUP_SUCCESS" });
+    })
+    .catch(err => {
+      dispatch({ type: "SIGNUP_ERROR", err });
+    });
+}

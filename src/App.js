@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ToDoList from "./components/ToDoList";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
 import requireAuth from "./components/auth/requireAuth";
 import { connect } from "react-redux";
 import { fetchUser } from "./actions";
@@ -17,7 +18,8 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={SignIn} />
-            <Route path="/app" component={requireAuth(ToDoList)} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/todos" component={requireAuth(ToDoList)} />
           </Switch>
         </div>
       </BrowserRouter>
