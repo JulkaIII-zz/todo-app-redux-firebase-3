@@ -23,7 +23,7 @@ class SignUp extends Component {
 
   render() {
     const { auth } = this.props;
-    console.log('auth: ', auth);
+    console.log("auth in signup: ", auth);
     if (auth && auth.uid) return <Redirect to="/todos" />;
     return (
       <div className="container">
@@ -57,7 +57,7 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({ auth }) => {
   return { auth };
 };
 

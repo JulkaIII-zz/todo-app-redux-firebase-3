@@ -4,6 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import ToDoListItem from "./ToDoListItem";
 import Preloader from "./Preloader";
+import { Redirect } from "react-router-dom";
 
 class ToDoList extends Component {
   state = {
@@ -25,6 +26,9 @@ class ToDoList extends Component {
 
   renderAddForm = () => {
     const { addFormVisible, addFormValue } = this.state;
+    const { auth } = this.props;
+    // if (!auth.uid) return <Redirect to="/" />;
+
     if (addFormVisible) {
       return (
         <div id="todo-add-form" className="col s10 offset-s1">
