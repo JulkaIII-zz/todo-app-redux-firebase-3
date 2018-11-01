@@ -11,7 +11,10 @@ class ToDoListItem extends Component {
   render() {
     const { todoId, todo } = this.props;
     return (
-      <div key="toDoName" className="col s10 offset-s1 to-do-list-item teal">
+      <div
+        key="toDoName"
+        className="col s10 offset-s1 to-do-list-item pink accent-4"
+      >
         <h4>
           {todo.title}{" "}
           <span
@@ -26,4 +29,7 @@ class ToDoListItem extends Component {
   }
 }
 
-export default connect(null, { completeToDo })(ToDoListItem);
+export default connect(
+  null,
+  { completeToDo }
+)(ToDoListItem);

@@ -2,6 +2,7 @@ import { todosRef, authRef, provider } from "../config/firebase";
 import { FETCH_TODOS, FETCH_USER } from "./types";
 
 export const addToDo = newToDo => async dispatch => {
+  console.log("todo: ", newToDo);
   todosRef.push().set(newToDo);
 };
 
@@ -20,6 +21,7 @@ export const fetchToDos = () => async dispatch => {
 
 export const fetchUser = () => dispatch => {
   authRef.onAuthStateChanged(user => {
+    console.log("name: ", name);
     if (user) {
       dispatch({
         type: FETCH_USER,
@@ -34,13 +36,28 @@ export const fetchUser = () => dispatch => {
   });
 };
 
-export const signIn = () => dispatch => {
+export const signInWithGoogle = () => dispatch => {
   authRef
     .signInWithPopup(provider)
-    .then(result => {})
-    .catch(error => {
-      console.log(error);
+    .then(() => {
+      dispatch({ type: "LOGIN_SUCCESS" });
+    })
+    .catch(err => {
+      dispatch({ type: "LOGIN_ERROR", err });
     });
+};
+
+export const signIn = credentials => {
+  return dispatch => {
+    authRef
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .then(() => {
+        dispatch({ type: "LOGIN_SUCCESS" });
+      })
+      .catch(err => {
+        dispatch({ type: "LOGIN_ERROR", err });
+      });
+  };
 };
 
 export const signOut = () => dispatch => {
@@ -54,7 +71,7 @@ export const signOut = () => dispatch => {
     });
 };
 
-export const signUp = (newUser) => dispatch => {
+export const signUp = newUser => dispatch => {
   authRef
     .createUserWithEmailAndPassword(newUser.email, newUser.password)
     .then(() => {
@@ -63,4 +80,4 @@ export const signUp = (newUser) => dispatch => {
     .catch(err => {
       dispatch({ type: "SIGNUP_ERROR", err });
     });
-}
+};

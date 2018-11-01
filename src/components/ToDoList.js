@@ -4,10 +4,10 @@ import _ from "lodash";
 import * as actions from "../actions";
 import ToDoListItem from "./ToDoListItem";
 import Preloader from "./Preloader";
+import { Redirect } from "react-router-dom";
 
 class ToDoList extends Component {
   state = {
-    addFormVisible: false,
     addFormValue: ""
   };
 
@@ -24,25 +24,25 @@ class ToDoList extends Component {
   };
 
   renderAddForm = () => {
-    const { addFormVisible, addFormValue } = this.state;
-    if (addFormVisible) {
-      return (
-        <div id="todo-add-form" className="col s10 offset-s1">
-          <form onSubmit={this.handleFormSubmit}>
-            <div className="input-field">
-              <i className="material-icons prefix">note_add</i>
-              <input
-                value={addFormValue}
-                onChange={this.handleInputChange}
-                id="toDoNext"
-                type="text"
-              />
-              <label htmlFor="toDoNext">What To Do Next</label>
-            </div>
-          </form>
-        </div>
-      );
-    }
+    const { addFormValue } = this.state;
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/" />;
+
+    return (
+      <div id="todo-add-form" className="col s10 offset-s1">
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="input-field">
+            <input
+              value={addFormValue}
+              onChange={this.handleInputChange}
+              id="toDoNext"
+              type="text"
+            />
+            <label htmlFor="toDoNext">What To Do Next</label>
+          </div>
+        </form>
+      </div>
+    );
   };
 
   renderToDos() {
@@ -81,31 +81,11 @@ class ToDoList extends Component {
   }
 
   render() {
-    const { addFormVisible } = this.state;
     return (
       <div className="to-do-list-container">
         <div className="row">
           {this.renderAddForm()}
           {this.renderToDos()}
-        </div>
-        <div className="fixed-action-btn">
-          <button
-            onClick={this.props.signOut}
-            id="sign-out-button"
-            className="btn-floating btn-large teal darken-4"
-          >
-            <i className="large material-icons">exit_to_app</i>
-          </button>
-          <button
-            onClick={() => this.setState({ addFormVisible: !addFormVisible })}
-            className="btn-floating btn-large teal darken-4"
-          >
-            {addFormVisible ? (
-              <i className="large material-icons">close</i>
-            ) : (
-              <i className="large material-icons">add</i>
-            )}
-          </button>
         </div>
       </div>
     );

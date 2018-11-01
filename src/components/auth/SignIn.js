@@ -1,33 +1,72 @@
 import "../../styles/signIn.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { signIn } from "../../actions";
+import { signInWithGoogle, signIn } from "../../actions";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { Redirect } from "react-router-dom";
 
 class Signin extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
   static contextTypes = {
     router: PropTypes.object
   };
 
-  componentWillUpdate(nextProps) {
-    if (nextProps.auth) {
-      this.context.router.history.push("/todos");
-    }
-  }
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
+  handeSubmit = e => {
+    e.preventDefault();
+    this.props.signIn(this.state);
+  };
 
   render() {
+    const { auth } = this.props;
+    console.log("auth login: ", auth);
+    if (auth && auth.uid) return <Redirect to="/todos" />;
     return (
       <div className="row social-signin-container">
         <div className="col s10 offset-s1 center-align">
           <img alt="Sign in" id="sign-in" src="/img/user.png" />
           <h4 id="sign-in-header">Sign In to start</h4>
-          <a href="#" className="social-signin" onClick={this.props.signIn}>
-            <i className="fa fa-google social-signin-icon" />
-            Sign In With Google
+          <form onSubmit={this.handeSubmit}>
+            <h5 className="grey-text text-darken-3">Sign in</h5>
+            <div className="input-field">
+              <label htmlFor="email">Email</label>
+              <input type="email" id="email" onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="input-field">
+              <button className="btn pink lighten-1 z-depth-0">Login</button>
+              <div className="red-text center">
+                {auth && auth.authError ? <p>{auth.authError}</p> : null}
+              </div>
+            </div>
+          </form>
+
+          <p />
+          <a
+            href="#"
+            className="waves-effect waves-light btn social google red darken-1"
+            onClick={this.props.signInWithGoogle}
+          >
+            <i className="fa fa-google social-signin-icon" /> Sign in with
+            google
           </a>
         </div>
-        <NavLink to="/signup">Signup</NavLink>
       </div>
     );
   }
@@ -37,7 +76,17 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      signIn,
+      signInWithGoogle
+    },
+    dispatch
+  );
+};
+
 export default connect(
   mapStateToProps,
-  { signIn }
+  mapDispatchToProps
 )(Signin);
