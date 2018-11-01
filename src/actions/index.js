@@ -1,12 +1,12 @@
 import { todosRef, authRef, provider } from "../config/firebase";
-import { FETCH_TODOS, FETCH_USER } from "./types";
+import { FETCH_TODOS, FETCH_USER, ADD_TODO, LOGIN_SUCCESS,  } from "./types";
 
-export const addToDo = newToDo => async dispatch => {
+export const addToDo = newToDo => async () => {
   console.log("todo: ", newToDo);
   todosRef.push().set(newToDo);
 };
 
-export const completeToDo = completeToDoId => async dispatch => {
+export const completeToDo = completeToDoId => async () => {
   todosRef.child(completeToDoId).remove();
 };
 
@@ -40,10 +40,10 @@ export const signInWithGoogle = () => dispatch => {
   authRef
     .signInWithPopup(provider)
     .then(() => {
-      dispatch({ type: "LOGIN_SUCCESS" });
+      dispatch({ type: LOGIN_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: "LOGIN_ERROR", err });
+      dispatch({ type: LOGIN_ERROR, err });
     });
 };
 
@@ -52,10 +52,10 @@ export const signIn = credentials => {
     authRef
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
-        dispatch({ type: "LOGIN_SUCCESS" });
+        dispatch({ type: LOGIN_SUCCESS });
       })
       .catch(err => {
-        dispatch({ type: "LOGIN_ERROR", err });
+        dispatch({ type: LOGIN_ERROR, err });
       });
   };
 };
