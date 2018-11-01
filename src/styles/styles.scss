@@ -34,6 +34,11 @@ body {
   #todo-add-form {
     animation-duration: 1s;
     animation-name: slidein;
+    i {
+      position: relative;
+      left: -30px;
+      top: 55px;
+    }
   }
   
   #nothing-was-found {
