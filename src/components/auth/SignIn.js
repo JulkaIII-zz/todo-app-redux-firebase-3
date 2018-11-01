@@ -33,10 +33,8 @@ class Signin extends Component {
     return (
       <div className="row social-signin-container">
         <div className="col s10 offset-s1 center-align">
-          <img alt="Sign in" id="sign-in" src="/img/user.png" />
-          <h4 id="sign-in-header">Sign In to start</h4>
+          <h4 className="grey-text text-darken-3">Sign in</h4>
           <form onSubmit={this.handeSubmit}>
-            <h5 className="grey-text text-darken-3">Sign in</h5>
             <div className="input-field">
               <label htmlFor="email">Email</label>
               <input type="email" id="email" onChange={this.handleChange} />

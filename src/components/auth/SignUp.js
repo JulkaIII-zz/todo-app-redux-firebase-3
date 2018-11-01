@@ -26,9 +26,9 @@ class SignUp extends Component {
     console.log("auth in signup: ", auth);
     if (auth && auth.uid) return <Redirect to="/todos" />;
     return (
-      <div className="container">
+      <div className="container signup-container">
+        <h4 className="grey-text text-darken-3">Sign up</h4>
         <form onSubmit={this.handeSubmit}>
-          <h5 className="grey-text text-darken-3">Sign up</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={this.handleChange} />

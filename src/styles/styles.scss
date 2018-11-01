@@ -6,7 +6,9 @@ body {
 }
 
 .to-do-list-container {
+  margin: 0 auto;
     margin-top: 25px;
+    max-width: 750px;
   }
   
   .to-do-list-item {
@@ -21,12 +23,12 @@ body {
   }
   
   .to-do-list-item:hover {
-    background-color: #26a69a !important;
+    background-color: #f50057 !important;
   }
   
   .complete-todo-item {
     float: right;
-    right: 20px;
+    top: -5px;
   }
   
   #todo-add-form {
@@ -46,4 +48,10 @@ body {
     to {
       margin-left: 1;
     }
+  }
+
+  .signup-container {
+    max-width: 500px;
+    text-align: center;
+    margin-top: 5%;
   }
