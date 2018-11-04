@@ -15,15 +15,15 @@ class ToDoListItem extends Component {
         key="toDoName"
         className="col s10 offset-s1 to-do-list-item pink accent-4"
       >
-        <h4>
+        <h6>
           {todo.title}{" "}
           <span
             onClick={() => this.handleCompleteClick(todoId)}
             className="complete-todo-item waves-effect waves-light teal lighten-5 teal-text text-darken-4 btn"
           >
-            <i className="large material-icons">done</i>
+            <i className="medium material-icons">done</i>
           </span>
-        </h4>
+        </h6>
       </div>
     );
   }

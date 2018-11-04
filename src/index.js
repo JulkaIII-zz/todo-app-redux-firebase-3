@@ -9,8 +9,13 @@ import reducers from "./reducers";
 import "@babel/polyfill";
 import App from "./App";
 import "./styles/styles.scss";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(
+  reducers,
+  {},
+  composeWithDevTools(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
   <Provider store={store}>
