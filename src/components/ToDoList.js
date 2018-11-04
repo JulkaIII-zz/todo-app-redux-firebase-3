@@ -56,11 +56,7 @@ class ToDoList extends Component {
     } else if (data === null) {
       return (
         <div className="col s10 offset-s1 center-align">
-          <img
-            alt="Nothing was found"
-            id="nothing-was-found"
-            src="/img/nothing.png"
-          />
+          <i className="large material-icons">done_all</i>
           <h4>You have completed all the tasks</h4>
           <p>Start by clicking add button in the bottom of the screen</p>
         </div>
