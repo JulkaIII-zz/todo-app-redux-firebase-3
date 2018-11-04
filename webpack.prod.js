@@ -3,8 +3,8 @@ const common = require("./webpack.common.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(common, {
-  mode: "production",
-  devtool: "source-map",
+  mode: "production", // loads UglifyJSPlugin
+  devtool: "source-map", // Avoid inline-*** and eval-*** use in production as they can increase bundle size and reduce the overall performance.
   optimization: {
     // css optimization
     splitChunks: {
